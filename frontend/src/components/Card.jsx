@@ -1,17 +1,23 @@
-import React from 'react'
+import  { useState } from 'react'
+import DeleteModal from './DeleteModal'
+import { useNavigate } from 'react-router-dom'
 
-const Card = ({title}) => {
+const Card = ({ title, id, getAll }) => {
+    const [delModel, setDelModel] = useState(false)
+    const [todoId, setTodoId] = useState()
+    const navigate = useNavigate()
 
     return (
-        <div className='flex gap-5'>
+        <>
             <div>
                 {title}
             </div>
-            <div className='flex gap-5'>
-                <button>update</button>
-                <button>delete</button>
+            <div>
+                <button onClick={() => navigate(`/update/${id}`, { state: { title } })}>Update</button>
+                <button onClick={() => { setDelModel(true); setTodoId(id) }}>delete</button>
             </div>
-        </div>
+            {delModel && <DeleteModal setDelModel={setDelModel} todoId={todoId} getAll={getAll} />}
+        </>
     )
 }
 

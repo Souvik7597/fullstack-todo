@@ -17,7 +17,7 @@ const Home = () => {
             setTodo(res.data.data)
 
         } catch (error) {
-            console.log(error)
+            console.log("Data Not Found", error)
         }
     }
 
@@ -31,12 +31,10 @@ const Home = () => {
             console.log(res)
             setFlag(true)
             setText('')
-            // getAll()
 
         } catch (error) {
-            console.log(error)
+            console.log("Data Not Created",error)
         }
-
     }
 
     useEffect(() => {
@@ -44,17 +42,17 @@ const Home = () => {
     }, [flag])
 
     return (
-        <>
+        <div className="text-center pt-20">
             <Header />
             <div>
-                <input type="text" placeholder="add todo" onChange={(e) => setText(e.target.value)} value={text} />
+                <input onChange={(e) => setText(e.target.value)} value={text} type="text" placeholder="add todo" />
                 <button onClick={() => handleTodo(text)}>Add</button>
             </div>
-            <MainSection todo={todo} />
+            <MainSection todo={todo} getAll={getAll} />
             <Footer />
 
 
-        </>
+        </div>
     )
 }
 

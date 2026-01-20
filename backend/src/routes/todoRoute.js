@@ -8,10 +8,10 @@ import { updateTodo } from "../controllers/updateTodo.js";
 import { deleteTodo } from "../controllers/deleteTodo.js";
 const todoRoute = express.Router();
 
-todoRoute.post("/create", createTodo); // http://localhost:8001/create
+todoRoute.post("/create", createTodo); // http://localhost:8001/todo/create
 todoRoute.get("/getAll", getAllTodo);   //http://localhost:8001/getAll
 todoRoute.get("/getById/:id", getTodoById);
 todoRoute.put("/update/:id", updateTodo);
-todoRoute.delete("/delete/:id", deleteTodo);
+todoRoute.delete("/delete/:id", deleteTodo);//http://localhost:8001/todo/delete/${todoId}
 
 export default todoRoute;
