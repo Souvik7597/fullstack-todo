@@ -1,11 +1,12 @@
 import axios from "axios"
 import { useState } from "react"
+import toast from "react-hot-toast";
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 
 export default function UpdateModal() {
     const location = useLocation()
     const {title} = location.state || {};
-    
+
     const [newText, setNewText] = useState(title)
     
     const { id } = useParams()
@@ -17,9 +18,10 @@ export default function UpdateModal() {
             const res = await axios.put(`http://localhost:8001/todo/update/${id}`, { title: newText })
             console.log(res)
             navigate("/")
-
+toast.success(res.data.message)
         } catch (error) {
             console.log(error.response.data.message)
+            toast.error(error.response.data.errors)
         }
     }
 

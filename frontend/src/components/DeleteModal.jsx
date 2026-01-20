@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import toast from 'react-hot-toast'
 
 export default function DeleteModal({ setDelModel, todoId,getAll }) {
     const deleteTodo = async () => {
@@ -9,8 +10,10 @@ export default function DeleteModal({ setDelModel, todoId,getAll }) {
             console.log(res)
             setDelModel(false)
             getAll()
+            toast.success(res.data.message)
         } catch (error) {
             console.log(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 

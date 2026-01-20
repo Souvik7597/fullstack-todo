@@ -3,6 +3,7 @@ import Footer from "../components/Footer"
 import Header from "../components/Header"
 import MainSection from "../components/MainSection"
 import axios from "axios"
+import toast from "react-hot-toast"
 
 const Home = () => {
 
@@ -29,11 +30,14 @@ const Home = () => {
             setFlag(false)
             const res = await axios.post(`http://localhost:8001/todo/create`, data)
             console.log(res)
+            toast.success(res.data.message)
             setFlag(true)
             setText('')
 
         } catch (error) {
             console.log("Data Not Created",error)
+            toast.error(error.response.data.errors || error.response.data.message)
+            setText("")
         }
     }
 
